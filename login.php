@@ -37,29 +37,62 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giris Yap</title>
+    <title>Giris Yap - Motor Alsana</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<header>
-    <a href="index.php">Ana Sayfa</a>
-</header>
-<div class="container">
-    <div class="card">
-        <h2>Giris Yap</h2>
+
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.php" class="navbar-brand">
+            <span class="brand-icon">&#9881;</span> Motor Alsana
+        </a>
+        <button class="navbar-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+        <div class="navbar-links" id="navLinks">
+            <a href="index.php" class="nav-link">Ana Sayfa</a>
+            <a href="register.php" class="nav-link">Kayit Ol</a>
+            <a href="login.php" class="nav-link active nav-link-accent">Giris Yap</a>
+        </div>
+    </div>
+</nav>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <span class="auth-icon">&#128274;</span>
+            <h2>Giris Yap</h2>
+            <p>Hesabiniza giris yapin</p>
+        </div>
         <?php if (!empty($message)): ?>
-            <p class="<?php echo $isError ? "error" : "success"; ?>"><?php echo htmlspecialchars($message); ?></p>
+            <div class="alert <?php echo $isError ? "alert-error" : "alert-success"; ?>"><?php echo htmlspecialchars($message); ?></div>
         <?php endif; ?>
         <form method="POST">
-            <label>Email</label>
-            <input type="email" name="email" required>
-
-            <label>Sifre</label>
-            <input type="password" name="password" required>
-
-            <button type="submit">Giris Yap</button>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" required placeholder="ornek@email.com">
+            </div>
+            <div class="form-group">
+                <label for="password">Sifre</label>
+                <input id="password" type="password" name="password" required placeholder="Sifrenizi girin">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Giris Yap</button>
         </form>
+        <div class="auth-footer">
+            <p>Hesabiniz yok mu? <a href="register.php">Kayit Ol</a></p>
+        </div>
     </div>
 </div>
+
+<script>
+(function () {
+    var navToggle = document.getElementById("navToggle");
+    var navLinks = document.getElementById("navLinks");
+    if (navToggle && navLinks) {
+        navToggle.addEventListener("click", function () {
+            navLinks.classList.toggle("open");
+        });
+    }
+})();
+</script>
 </body>
 </html>
